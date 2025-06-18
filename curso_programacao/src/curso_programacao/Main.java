@@ -1,33 +1,29 @@
 package curso_programacao;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
 
-		double a, b, B, h, area, c;
-		int A, x, y, z;
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
 		
-		a = 5.0;
-		A = (int) a;
-	
-		x = 5;
-		y = 2 * x;
+		String x;
+		int y;
+		double z;
+		char a;
 		
-		z = 5;
-		c = 2 * z;
+		x = sc.next();
+		y = sc.nextInt();
+		z = sc.nextDouble();
+		a = sc.next().charAt(0);
 		
-		b = 6.0;
-		B = 8.0;
-		h = 5.0;
+		System.out.println("Voce digitou: " + x);
+		System.out.println("Voce digitou: " + y);
+		System.out.println("Voce digitou: " + z);
+		System.out.println("Voce digitou: " + a);
 		
-		area = (b + B) / 2.0 * h;
-		
-		System.out.println(A);
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(z);
-		System.out.println(c);
-		System.out.println(area);
+		sc.close();
 		
 	}
 }
