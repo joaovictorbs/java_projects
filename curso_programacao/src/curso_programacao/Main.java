@@ -5,29 +5,133 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 
-		double x = 3.0;
-		double y = 4.0;
-		double z = -5.0;
-		double A, B, C;
+		/*
+		EXERCICIO 1
+		Scanner sc = new Scanner(System.in); 
+		int valor1, valor2, soma;
 		
-		A = Math.sqrt(x);
-		B = Math.sqrt(y);
-		C = Math.sqrt(25.0);
-		System.out.println("Raiz quadrada de " + x + " = " + A);
-		System.out.println("Raiz quadrada de " + y + " = " + B);
-		System.out.println("Raiz quadrada de 25 = " + C);
+		valor1 = sc.nextInt();
+		valor2 = sc.nextInt();
 		
-		A = Math.pow(x, y);
-		B = Math.pow(x, 2.0);
-		C = Math.pow(5.0, 2.0);
-		System.out.println(x + " elevado a " + y + " = " + A);
-		System.out.println(x + " elevado ao quadrado = " + B);
-		System.out.println(x + " 5 elevado ao quadrado " + C);
+		soma = valor1 + valor2;
 		
-		A = Math.abs(y);
-		B = Math.abs(z);
-		System.out.println("Valor absoluto de " + y + " = " + A);
-		System.out.println("Valor absoluto de " + z + " = " + B);
+		System.out.println("SOMA = " + soma);
 		
+		sc.close();
+		*/
+		
+		
+		
+		
+		/*EXERCICIO 2
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		double raio, area, pi;
+		
+		pi = 3.14159;
+		raio = sc.nextDouble();
+		
+		area = pi * (raio * raio);
+		
+		System.out.printf("A=%.4f", area);
+		
+		sc.close();
+		*/
+		
+		
+		
+		
+		/*EXERCICIO 3 
+		Scanner sc = new Scanner(System.in);
+
+		int A, B, C, D, diferenca;
+				
+		A = sc.nextInt();
+		B = sc.nextInt();
+		C = sc.nextInt();
+		D = sc.nextInt();
+		
+		diferenca = ((A * B) - (C * D));
+		
+		System.out.println("DIFERENCA = " + diferenca);
+		
+		sc.close();
+		*/
+		
+		
+		
+		/*EXERCICIO 4
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+
+		int numeroFuncionario, horasTrabalho;
+		double valorHora, calculoSalario;
+		
+		numeroFuncionario = sc.nextInt();
+		horasTrabalho = sc.nextInt();
+		valorHora = sc.nextDouble();
+		
+		calculoSalario = horasTrabalho * valorHora;
+		
+		System.out.printf("NUMBER = %s%n", numeroFuncionario);
+		System.out.printf("SALARY = U$ %.2f", calculoSalario);
+		
+		sc.close();
+		*/
+		
+		
+		
+		
+		/*EXERCICIO  5
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+
+		int codigoPeca1, codigoPeca2, numeroPeca1, numeroPeca2;
+		double valorUnitario1, valorUnitario2, valorPagar;
+		
+		codigoPeca1 = sc.nextInt();
+		numeroPeca1 = sc.nextInt();
+		valorUnitario1 = sc.nextDouble();
+
+		codigoPeca2 = sc.nextInt();
+		numeroPeca2 = sc.nextInt();
+		valorUnitario2 = sc.nextDouble();
+		
+		valorPagar = ((numeroPeca1 * valorUnitario1) + (numeroPeca2 * valorUnitario2));
+		
+		System.out.printf("VALOR A PAGAR: R$ %.2f", valorPagar);
+		
+		sc.close();
+		*/
+		
+		
+		
+		
+		/*EXERCICIO  6
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		double A, B, C, triangulo, circulo, trapezio, quadrado, retangulo, pi;
+		pi = 3.14159;
+				
+		A = sc.nextDouble();
+		B = sc.nextDouble();
+		C = sc.nextDouble();
+		
+		triangulo = (A * C) / 2;
+		circulo = pi * (C * C);
+		trapezio = (A + B) * C / 2;
+		quadrado = B * B;
+		retangulo = A * B;
+		
+		System.out.printf("TRIANGULO: %.3f%n", triangulo);
+		System.out.printf("CIRCULO: %.3f%n", circulo);
+		System.out.printf("TRAPEZIO: %.3f%n", trapezio);
+		System.out.printf("QUADRADO: %.3f%n", quadrado);
+		System.out.printf("RETANGULO: %.3f%n", retangulo);
+		
+		sc.close();
+		*/
 	}
 }
