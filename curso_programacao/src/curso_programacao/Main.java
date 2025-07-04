@@ -1,42 +1,17 @@
 package curso_programacao;
-]import java.util.Scanner;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 		
-		int x = sc.nextInt();
-		String dia;
+		double preco = 34.5;
+		double desconto = (preco < 20.0) ? preco * 0.1 : preco * 0.05;
+
+		System.out.println(desconto);
 		
-		switch(x) {
-		case 1:
-			dia = "domingo";
-			break;
-		case 2:
-			dia = "segunda";
-			break;
-		case 3:
-			dia = "terca";
-			break;
-		case 4:
-			dia = "quarta";
-			break;
-		case 5:
-			dia = "quinta";
-			break;
-		case 6:
-			dia = "sexta";
-			break;
-		case 7:
-			dia = "Sabado";
-			break;
-		default:
-			dia = "Valor invalido";
-			break;
-		}
-		
-		System.out.println("Dia da semana: " + dia);
 		sc.close();
 	}
 }
