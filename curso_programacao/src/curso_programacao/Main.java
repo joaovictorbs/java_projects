@@ -5,71 +5,22 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		 
-		/* Exercicio 01 
 		Scanner sc = new Scanner(System.in);
-
-		int senha = sc.nextInt();
-		 
-		while(senha != 2002) {
-			System.out.println("Senha Invalida" + "\n");
-			senha = sc.nextInt();
+		
+		int N = sc.nextInt();
+		
+		int soma = 0;
+		for (int i=0; i<N; i++) {
+			int x = sc.nextInt();
+			soma = soma + x;
 		}
-		 
-		System.out.print("Acesso Permitido");
-		 
-		sc.close();
-		*/
 		
-		/* Exercicio 02
-		Scanner sc = new Scanner(System.in);
+		System.out.println(soma);
 		
-		int x = sc.nextInt();
-		int y = sc.nextInt();
-				
-		while(x != 0 && y != 0) {
-			if(x > 0 && y > 0) {
-				System.out.println("Primeiro" + "\n");
-			}
-			else if(x < 0 && y > 0) {
-				System.out.println("Segundo" + "\n");
-			}
-			else if(x < 0 && y < 0) {
-				System.out.println("Terceiro" + "\n");
-			}
-			else {
-				System.out.println("Quarto" + "\n");
-			}
-			x = sc.nextInt();
-			y = sc.nextInt();
+		for (int i = 4; i >= 0; i--) {
+			System.out.println("Valor de i: " + i);
 		}
 		
 		sc.close();
-		*/
-		
-		/* Exercicio 03
-		Scanner sc = new Scanner(System.in);
-		
-		int codCliente, totalAlcool = 0, totalGasolina = 0, totalDiesel = 0;
-		
-		codCliente = sc.nextInt();
-		
-		while(codCliente != 4) {
-			if(codCliente == 1) {
-				totalAlcool += 1;
-			}
-			else if(codCliente == 2) {
-				totalGasolina += 1;
-			}
-			else if(codCliente == 3) {
-				totalDiesel+= 1;
-			}
-			
-			codCliente = sc.nextInt();
-		}
-		
-		System.out.printf("MUITO OBRIGADO %nAlcool: %d%nGasolina: %d%nDiesel: %d", totalAlcool, totalGasolina, totalDiesel);
-		
-		sc.close();
-		*/
 	}
 }
