@@ -5,18 +5,17 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		 
-		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
+
+		int mask = 0b100000;
+		int n = sc.nextInt();
 		
-		char resp;
-		do {
-			System.out.print("Digite a temperatura em Celsius: ");
-			double C = sc.nextDouble();
-			double F = 9.0 * C / 5.0 + 32.0;
-			System.out.printf("Equivalente em Fahrenheit: %.1f%n", F);
-			System.out.print("Deseja repetir (s/n)? ");
-			resp = sc.next().charAt(0);
-		} while (resp != 'n');
+		if ((n & mask) != 0) {
+			System.out.println("6th bit is true!");
+		}
+		else {
+			System.out.println("6th bit is false!");
+		}
 		
 		sc.close();
 		
