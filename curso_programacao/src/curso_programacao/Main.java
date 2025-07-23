@@ -1,40 +1,40 @@
 package curso_programacao;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
 		
+		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
+		double xA, xB, xC, yA, yB, yC;
 		
-		System.out.println("Enter three numbers: ");
-		int a = sc.nextInt();
-		int b = sc.nextInt();
-		int c = sc.nextInt();
+		System.out.println("Enter the measures of triangle X: ");
+		xA = sc.nextDouble();
+		xB = sc.nextDouble();
+		xC = sc.nextDouble();
+		System.out.println("Enter the measures of triangle Y: ");
+		yA = sc.nextDouble();
+		yB = sc.nextDouble();
+		yC = sc.nextDouble();
 		
-		int higher = max(a, b, c);
+		double p = (xA + xB + xC) / 2.0;
+		double areaX = Math.sqrt(p * (p - xA) * (p - xB) * (p - xC));
 		
-		showResult(higher);
+		p = (yA + yB + yC) / 2.0;
+		double areaY = Math.sqrt(p * (p - yA) * (p - yB) * (p - yC));
 		
-		sc.close();
-	}
-	
-	public static int max(int x, int y, int z) {
-		int aux;
-		if (x > y && x > z) {
-			aux = x;
-		}
-		else if (y > z) {
-			aux = y;
+		System.out.printf("Triangle X area: %.4f%n", areaX);
+		System.out.printf("Triangle X area: %.4f%n", areaY);
+		
+		if (areaX > areaY) {
+			System.out.println("Larger area: X");
 		}
 		else {
-			aux = z;
+			System.out.println("Larger area: Y");
 		}
 		
-		return aux;
-	}
-	
-	public static void showResult(int value) {
-		System.out.println("Higher = " + value);
+		sc.close();
 	}
 }
