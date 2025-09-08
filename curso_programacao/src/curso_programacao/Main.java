@@ -11,7 +11,6 @@ public class Main {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		Calculator calc = new Calculator();
 		
 		double circumference;
 		double volume;
@@ -19,12 +18,12 @@ public class Main {
 		System.out.println("Enter radius:");
 		double radius = sc.nextDouble();
 		
-		circumference = calc.circumference(radius);
-		volume = calc.volume(radius);
+		circumference = Calculator.circumference(radius);
+		volume = Calculator.volume(radius);
 		
 		System.out.printf("Circumference: %.2f%n", circumference);
 		System.out.printf("Volume: %.2f%n", volume);
-		System.out.printf("PI value: %.2f%n", calc.PI);
+		System.out.printf("PI value: %.2f%n", Calculator.PI);
 		
 		sc.close();
 	}
