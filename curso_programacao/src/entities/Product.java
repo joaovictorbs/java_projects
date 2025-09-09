@@ -1,9 +1,10 @@
 package entities;
 
 public class Product {
-	public String name;
-	public double price;
-	public int quantity;
+	
+	private String name;
+	private double price;
+	private int quantity;
 	
 	public Product() { //construtor padrao
 	}
@@ -18,6 +19,26 @@ public class Product {
 		this.name = name;
 		this.price = price;
 		this.quantity = 0;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public double getPrice() {
+		return this.price;
+	}
+	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public int getQuantity() { //quantidade e alterada usando o addProducts e removeProducts
+		return this.quantity;
 	}
 	
 	public double totalValueInStock() {
