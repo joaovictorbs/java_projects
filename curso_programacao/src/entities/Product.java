@@ -5,10 +5,19 @@ public class Product {
 	public double price;
 	public int quantity;
 	
+	public Product() { //construtor padrao
+	}
+	
 	public Product(String name, double price, int quantity) { //construtor
 		this.name = name; //referencia o objeto
 		this.price = price;
 		this.quantity = quantity;
+	}
+	
+	public Product(String name, double price) { //sobrecarga / mais de uma versao
+		this.name = name;
+		this.price = price;
+		this.quantity = 0;
 	}
 	
 	public double totalValueInStock() {
