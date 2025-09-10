@@ -3,45 +3,53 @@ package curso_programacao;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entities.Product;
+import entities.BankAccount;
 
 public class Main {
 		
 	public static void main(String[] args) {
 		
+		/*EXERCICIO 1*/
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
+		double accountValue = 0.0;
+		
+		System.out.println("Enter account number: ");
+		int accountNumber = sc.nextInt();
+		sc.nextLine(); //consome a quebra de linha deixada pelo nextInt
+		
+		System.out.println("Enter account holder: ");
+		String accountHolder = sc.nextLine();
+		
+		System.out.println("Is there an initial deposit (y/n)?");
+		char response = sc.next().charAt(0);
 				
-		System.out.println("Enter product data: ");
+		if(response == 'y') {
+			System.out.println("Enter initial deposit value: ");
+			accountValue = sc.nextDouble();
+		}
 		
-		System.out.print("Name: ");
-		String name = sc.nextLine();
-		
-		System.out.print("Price: ");
-		double price= sc.nextDouble();
-		
-		Product product = new Product(name, price);
+		BankAccount bank = new BankAccount(accountNumber, accountHolder, accountValue);
 		
 		System.out.println();
-		System.out.println("Product data: "+ product);
+		System.out.println(bank);
+		System.out.println();
+		
+		System.out.println("Enter a deposit value: ");
+		accountValue = sc.nextDouble();
+		bank.deposit(accountValue);
+		
 		
 		System.out.println();
-		System.out.print("Enter the number of products to be added in stock: ");
+		System.out.println(bank);
+		System.out.println();
 		
-		int quantity = sc.nextInt();
-		product.addProducts(quantity);
+		System.out.println("Enter a withdraw value: ");
+		accountValue = sc.nextDouble();
+		bank.withdraw(accountValue);
 		
 		System.out.println();
-		System.out.println("Updated data: "+ product);
-		
-		System.out.println();
-		System.out.print("Enter the number of products to be removed from stock: ");
-		
-		quantity = sc.nextInt();
-		product.removeProducts(quantity);
-		
-		System.out.println();
-		System.out.println("Updated data: "+ product);
+		System.out.println(bank);
 		
 		sc.close();
 	}
