@@ -24,5 +24,4 @@ public class ProductArray {
 		this.price = price;
 	}
 	
-	
 }
