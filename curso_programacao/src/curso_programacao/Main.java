@@ -1,32 +1,25 @@
 package curso_programacao;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Calendar;
 import java.util.Date;
+
+import entities.OrderEnum;
+import entities.enums.OrderStatus;
+
+import java.text.ParseException;
 
 public class Main {
 
     public static void main(String[] args) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        OrderEnum order = new OrderEnum(1080, new Date(), OrderStatus.PENDING_PAYMENT);
 
-        Date d = Date.from(Instant.parse("2018-06-25T15:42:07Z"));
+        System.out.println(order);
 
-        System.out.println(sdf.format(d));
+        OrderStatus os1 = OrderStatus.DELIVERED;
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
-        cal.add(Calendar.HOUR_OF_DAY, 4);
-        d = cal.getTime();
+        OrderStatus os2 = OrderStatus.valueOf("DELIVERED");
 
-        int minutes = cal.get(Calendar.MINUTE);
-        int month = 1 + cal.get(Calendar.MONTH);
-
-        System.out.println(sdf.format(d));
-        System.out.println("Minutes: " + minutes);
-        System.out.println("Month: " + month);
-
+        System.out.println(os1);
+        System.out.println(os2);
     }
 }
