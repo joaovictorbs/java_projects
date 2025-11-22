@@ -3,41 +3,71 @@ package curso_programacao;
 import java.text.SimpleDateFormat;
 
 import entities.*;
+import entities.enums.OrderStatus;
 
 import java.text.ParseException;
-
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
 
 
 public class Main {
 
     public static void main(String[] args) throws ParseException {
+        Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        Comment c1 = new Comment("Have a nice trip!");
-        Comment c2 = new Comment("Wow that's awesome!");
-        Post p1 = new Post(
-                sdf.parse("21/06/2018 13:05:44"),
-                "Traveling to New Zealand",
-                "I'm going to visit this wonderful country!",
-                12);
+        System.out.println("Enter client data: ");
 
-        p1.addComment(c1);
-        p1.addComment(c2);
+        System.out.print("Name: ");
+        String name = sc.nextLine();
 
+        System.out.print("Email: ");
+        String email = sc.next();
 
-        Comment c3 = new Comment("Good night");
-        Comment c4 = new Comment("May the Force be with you");
-        Post p2 = new Post(
-                sdf.parse("28/07/2018 23:14:19"),
-                "Good night guys",
-                "See you tomorrow",
-                5);
+        System.out.print("Birth date (DD/MM/YYYY): ");
+        Date birthDate = sdf.parse(sc.next());
 
-        p2.addComment(c3);
-        p2.addComment(c4);
+        Client client = new Client(name, email, birthDate); //associa a cliente
 
-        System.out.println(p1);
-        System.out.println(p2);
+        System.out.println();
+        System.out.println("Enter order data:");
+
+        System.out.print("Status: ");
+        OrderStatus status = OrderStatus.valueOf(sc.next().toUpperCase());
+
+        Order order = new Order(new Date(), status, client); //associa order e o cliente
+
+        System.out.println("How many items to this order?");
+        int orderItens = sc.nextInt();
+
+        System.out.println();
+        for (int i=0; i<orderItens; i++) {
+            System.out.println("Enter #" + (i+1) + " item data");
+            sc.nextLine();
+
+            System.out.print("Product name: ");
+            String productName = sc.nextLine();
+
+            System.out.print("Product price: ");
+            Double productPrice = sc.nextDouble();
+
+            Product product = new Product(productName, productPrice);
+
+            System.out.print("Quantity: ");
+            Integer quantity = sc.nextInt();
+
+            OrderItem orderItem = new OrderItem(quantity, productPrice, product);
+
+            order.addItem(orderItem);
+        }
+
+        System.out.println();
+        System.out.println("ORDER SUMMARY:");
+        System.out.println(order);
+
+        sc.close();
     }
 }

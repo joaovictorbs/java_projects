@@ -2,17 +2,10 @@ package entities;
 
 public class Product {
 	
-	String name; //acessao somente no mesmo pacote
-	private double price;
-	private int quantity;
+	private String name;
+	private Double price;
 		
 	public Product(){}
-	
-	public Product(String name, double price, int quantity) {
-		this.name = name;
-		this.price = price;
-		this.quantity = quantity;
-	}
 
 	public Product(String name, double price) {
 		this.name = name;
@@ -27,37 +20,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public double totalValueInStock() {
-		return this.price * this.quantity;
-	}
-
-	public void addProducts(int quantity) {
-		this.quantity += quantity;
-	}
-	
-	public void removeProducts(int quantity) {
-		this.quantity -= quantity;
-	}
-	
-	public String toString() {
-		return name 
-			+ ", $" 
-			+ String.format("%.2f", price) 
-			+ ", " 
-			+ quantity
-			+ " units, Total: $"
-			+ String.format("%.2f", totalValueInStock());
 	}
 }
