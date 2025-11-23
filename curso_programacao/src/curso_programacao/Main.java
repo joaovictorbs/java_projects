@@ -1,61 +1,27 @@
 package curso_programacao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import entities.TaxPayer;
-import entities.TaxPayerCompany;
-import entities.TaxPayerIndividual;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        List<TaxPayer> list = new ArrayList<>();
-
-        System.out.print("Enter the number of tax payers: ");
-        int n = sc.nextInt();
-
-        for (int i=1; i<=n; i++) {
-            System.out.println("Tax payer #" + i + " data:");
-            System.out.print("Individual or Company (i/c)? ");
-            char ch = sc.next().charAt(0);
-            sc.nextLine();
-
-            System.out.print("Name: ");
-            String name = sc.nextLine();
-
-            System.out.print("Anual income: ");
-            double anualIncome = Double.parseDouble(sc.nextLine());
-
-            if(ch == 'i') {
-                System.out.print("Health expenditures: ");
-                double healthExpenditures = sc.nextDouble();
-                list.add(new TaxPayerIndividual(name, anualIncome, healthExpenditures));
-            }
-            else {
-                System.out.print("Number of employees: ");
-                int numberEmployees = sc.nextInt();
-                list.add(new TaxPayerCompany(name, anualIncome, numberEmployees));
-            }
+        try {
+            String[] vect = sc.nextLine().split(" ");
+            int position = sc.nextInt();
+            System.out.println(vect[position]);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid position!");
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Input Error!");
         }
 
-        Double sum = 0.0;
-        System.out.println();
-        System.out.println("TAXES PAID: ");
-        for (TaxPayer taxPayer : list) {
-            System.out.println(taxPayer.getName() + ": $ " + String.format("%.2f", taxPayer.tax()));
-
-            sum += taxPayer.tax();
-        }
-
-        System.out.println();
-        System.out.println("TOTAL TAXES: $ " + String.format("%.2f", sum));
+        System.out.println("End of program");
 
         sc.close();
     }
