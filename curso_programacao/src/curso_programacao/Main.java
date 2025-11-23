@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entities.Circle;
-import entities.Rectangle;
-import entities.Shape;
-import entities.enums.Color;
+import entities.TaxPayer;
+import entities.TaxPayerCompany;
+import entities.TaxPayerIndividual;
 
 public class Main {
 
@@ -17,37 +16,46 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        List<Shape> list = new ArrayList<>();
+        List<TaxPayer> list = new ArrayList<>();
 
-        System.out.print("Enter the number of shapes: ");
+        System.out.print("Enter the number of tax payers: ");
         int n = sc.nextInt();
 
         for (int i=1; i<=n; i++) {
-            System.out.println("Shape #" + i + " data:");
-            System.out.print("Rectangle or Circle (r/c)? ");
+            System.out.println("Tax payer #" + i + " data:");
+            System.out.print("Individual or Company (i/c)? ");
             char ch = sc.next().charAt(0);
-            System.out.print("Color (BLACK/BLUE/RED): ");
-            Color color = Color.valueOf(sc.next());
+            sc.nextLine();
 
-            if(ch == 'r') {
-                System.out.print("Width: ");
-                double width = sc.nextDouble();
-                System.out.print("Height: ");
-                double height = sc.nextDouble();
-                list.add(new Rectangle(color, width, height));
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Anual income: ");
+            double anualIncome = Double.parseDouble(sc.nextLine());
+
+            if(ch == 'i') {
+                System.out.print("Health expenditures: ");
+                double healthExpenditures = sc.nextDouble();
+                list.add(new TaxPayerIndividual(name, anualIncome, healthExpenditures));
             }
             else {
-                System.out.print("Radius: ");
-                double radius = sc.nextDouble();
-                list.add(new Circle(color, radius));
+                System.out.print("Number of employees: ");
+                int numberEmployees = sc.nextInt();
+                list.add(new TaxPayerCompany(name, anualIncome, numberEmployees));
             }
+        }
+
+        Double sum = 0.0;
+        System.out.println();
+        System.out.println("TAXES PAID: ");
+        for (TaxPayer taxPayer : list) {
+            System.out.println(taxPayer.getName() + ": $ " + String.format("%.2f", taxPayer.tax()));
+
+            sum += taxPayer.tax();
         }
 
         System.out.println();
-        System.out.println("SHAPE AREAS: ");
-        for (Shape shape : list) {
-            System.out.println(String.format("%.2f", shape.area()));
-        }
+        System.out.println("TOTAL TAXES: $ " + String.format("%.2f", sum));
 
         sc.close();
     }
