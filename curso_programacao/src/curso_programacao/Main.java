@@ -1,58 +1,37 @@
 package curso_programacao;
 
-import entities.ImportedProduct;
-import entities.Product;
-import entities.UsedProduct;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import entities.Account;
+import entities.BusinessAccount;
+import entities.SavingsAccount;
 
 public class Main {
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
 
         Locale.setDefault(Locale.US);
-        Scanner sc = new Scanner(System.in);
+        List<Account> list = new ArrayList<>();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        list.add(new SavingsAccount(1001, "Alex", 500.00, 0.01));
+        list.add(new BusinessAccount(1002, "Maria", 1000.0, 400.0));
+        list.add(new SavingsAccount(1004, "Bob", 300.0, 0.01));
+        list.add(new BusinessAccount(1005, "Anna", 500.0, 500.0));
 
-        List<Product> list = new ArrayList<>();
-
-        System.out.print("Enter the number of products: ");
-        int n = sc.nextInt();
-
-        for (int i=1;i<=n;i++) {
-            System.out.println("Product #" + i + " data:");
-            System.out.print("Common, used or imported (c/u/i)? ");
-            char ch = sc.next().charAt(0);
-
-            System.out.print("Name: ");
-            sc.nextLine();
-            String name = sc.nextLine();
-
-            System.out.print("Price: ");
-            double price = sc.nextDouble();
-
-            if (ch == 'c') {
-                list.add(new Product(name, price));
-            } else if (ch == 'i') {
-                System.out.print("Customs fee: ");
-                double customsFee = sc.nextDouble();
-                list.add(new ImportedProduct(name, price, customsFee));
-            } else {
-                System.out.print("Manufacture date (DD/MM/YYYY): ");
-                Date manufactureDate = sdf.parse(sc.next());
-                list.add(new UsedProduct(name, price, manufactureDate));
-            }
+        double sum = 0.0;
+        for (Account acc : list) {
+            sum += acc.getBalance();
         }
 
-        System.out.println();
-        System.out.println("PRICE TAGS:");
-        for (Product pro : list) {
-            System.out.println(pro.priceTag());
-        }
+        System.out.printf("Total balance: %.2f%n", sum);
 
-        sc.close();
+        for (Account acc : list) {
+            acc.deposit(10.0);
+        }
+        for (Account acc : list) {
+            System.out.printf("Updated balance for account %d: %.2f%n", acc.getNumber(), acc.getBalance());
+        }
     }
 }

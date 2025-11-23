@@ -1,6 +1,6 @@
 package entities;
 
-public class SavingsAccount extends Account { //final evita que sejam criadas subclasses
+public class SavingsAccount extends Account {
 
     private Double interestRate;
 
@@ -26,7 +26,7 @@ public class SavingsAccount extends Account { //final evita que sejam criadas su
     }
 
     @Override
-    public final void withdraw(double amount) { //evita ser sobreposto
+    public final void withdraw(double amount) {
         balance -= amount;
     }
 }
