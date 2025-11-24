@@ -1,5 +1,7 @@
 package curso_programacao;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,37 +9,24 @@ public class Main {
 
     public static void main(String[] args) {
 
-        method1();
+        File file= new File("C:\\temp\\in.txt");
 
-        System.out.println("End of program");
+        Scanner sc = null;
 
-    }
-
-    public static void method1() {
-        System.out.println("***METHOD1 START***");
-        method2();
-        System.out.println("***METHOD1 END***");
-    }
-
-
-    public static void method2() {
-
-        System.out.println("***METHOD2 START***");
-        Scanner sc = new Scanner(System.in);
-
-        try {
-            String[] vect = sc.nextLine().split(" ");
-            int position = sc.nextInt();
-            System.out.println(vect[position]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid position!");
-            e.printStackTrace(); //sequencia de chamadas que gerou a excecao / mas nao finaliza o programa
-            sc.next();
-        } catch (InputMismatchException e) {
-            System.out.println("Input Error!");
+        try{
+            sc = new Scanner(file);
+            while(sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
         }
-
-        sc.close();
-        System.out.println("***METHOD2 END***");
+        catch(IOException e) {
+            System.out.println("Erroropeningfile: "+ e.getMessage());
+        }
+        finally{
+            if (sc!= null) {
+                sc.close();
+            }
+            System.out.println("Finally block executed");
+        }
     }
 }
