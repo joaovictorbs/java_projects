@@ -1,4 +1,4 @@
-package model.entities;
+/*package model.entities;
 
 public class SavingsAccount extends Account {
 
@@ -29,4 +29,4 @@ public class SavingsAccount extends Account {
     public final void withdraw(double amount) {
         balance -= amount;
     }
-}
+}*/

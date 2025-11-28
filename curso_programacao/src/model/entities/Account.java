@@ -1,18 +1,22 @@
 package model.entities;
 
-public abstract class Account {
+import model.exception.DomainException;
+
+public class Account {
 
     private Integer number;
     private String holder;
-    protected Double balance;
+    private Double balance;
+    private Double withdrawLimit;
 
     public Account() {
     }
 
-    public Account(Integer number, String holder, Double balance) {
+    public Account(Integer number, String holder, Double balance, Double withdrawLimit) {
         this.number = number;
         this.holder = holder;
         this.balance = balance;
+        this.withdrawLimit = withdrawLimit;
     }
 
     public Integer getNumber() {
@@ -35,11 +39,28 @@ public abstract class Account {
         return balance;
     }
 
-    public void withdraw(double amount) {
-        balance -= amount + 5.0;
+    public Double getWithdrawLimit() {
+        return withdrawLimit;
     }
 
     public void deposit(double amount) {
         balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        //nao pode ocorrer se nao houver saldo ou se o valor do saque for superior ao limite de saque da conta
+        if (amount > withdrawLimit) {
+            throw new DomainException("The amount exceeds withdraw limit");
+        }
+        else if(amount > balance) {
+            throw new DomainException("Not enough balance");
+        }
+        balance -= amount;
+    }
+
+    @Override
+    public String toString(){
+        return "New Balance: "
+                + String.format("%.2f", balance);
     }
 }

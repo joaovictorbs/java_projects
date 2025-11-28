@@ -1,48 +1,44 @@
 package curso_programacao;
 
-import model.entities.Reservation;
+import model.entities.Account;
 import model.exception.DomainException;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-            System.out.print("Room number: ");
-            int number = sc.nextInt();
-            System.out.print("Check-in date (dd/MM/yyyy): ");
-            Date checkIn = sdf.parse(sc.next());
-            System.out.print("Check-out date (dd/MM/yyyy): ");
-            Date checkOut = sdf.parse(sc.next());
+            System.out.println("Enter account data");
+            System.out.print("Number: ");
+            Integer number = sc.nextInt();
 
+            System.out.print("Holder: ");
+            String holder = sc.nextLine();
 
-            Reservation reservation = new Reservation(number, checkIn, checkOut);
-            System.out.println("Reservation: " + reservation);
+            sc.nextLine();
 
+            System.out.print("Initial balance: ");
+            Double balance = sc.nextDouble();
+
+            System.out.print("Withdraw limit: ");
+            Double withdrawLimit = sc.nextDouble();
+
+            Account account = new Account(number, holder, balance, withdrawLimit);
 
             System.out.println();
-            System.out.println("Enter data to update the reservation:");
-            System.out.print("Check-in date (dd/MM/yyyy): ");
-            checkIn = sdf.parse(sc.next());
-            System.out.print("Check-out date (dd/MM/yyyy): ");
-            checkOut = sdf.parse(sc.next());
+            System.out.print("Enter amount for withdraw: ");
+            Double amount = sc.nextDouble();
 
-            reservation.updateDate(checkIn, checkOut);
-            System.out.println("Reservation: " + reservation);
-        }
-        catch (ParseException e) {
-            System.out.println("Invalid date format");
+            account.withdraw(amount);
+            System.out.println(account);
         }
         catch (DomainException e) {
-            System.out.println("Error in reservation: " + e.getMessage());
+            System.out.println("Withdraw error: " + e.getMessage());
         }
         catch (RuntimeException e) {
             System.out.println("Unexpected error");
