@@ -4,12 +4,14 @@ public class Product {
 	
 	private String name;
 	private Double price;
+    Integer quantity;
 
 	public Product(){}
 
-	public Product(String name, Double price) {
+	public Product(String name, Double price, Integer quantity) {
 		this.name = name;
 		this.price = price;
+        this.quantity = quantity;
 	}
 	
 	public String getName() {
@@ -28,7 +30,15 @@ public class Product {
 		this.price = price;
 	}
 
-    public String priceTag() {
-        return name + " $ " + String.format("%.2f", price);
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double totalPrice() {
+        return price * quantity;
     }
 }

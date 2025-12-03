@@ -1,4 +1,4 @@
-package model.entities;
+/*package model.entities;
 
 public class ImportedProduct extends Product {
     private Double customsFee;
@@ -21,3 +21,4 @@ public class ImportedProduct extends Product {
         return super.getPrice() + customsFee;
     }
 }
+*/
