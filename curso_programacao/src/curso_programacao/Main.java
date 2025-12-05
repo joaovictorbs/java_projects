@@ -1,72 +1,51 @@
 package curso_programacao;
 
-import model.entities.Product;
+import model.entities.CarRental;
+import model.entities.Vehicle;
+import model.services.BrazilTaxService;
+import model.services.RentalService;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
-        Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
-        List<Product> list = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter a file path: ");
-        String strPath = sc.nextLine();
+        DateTimeFormatter fmt =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        try (BufferedReader br = new BufferedReader(new FileReader(strPath))){
-            String line = br.readLine();
+        System.out.println("Entre com os dados do aluguel");
+        System.out.print("Modelo do carro: ");
+        String carModel = sc.nextLine();
 
-            while(line != null) {
+        System.out.print("Retirada (dd/MM/yyyy hh:mm): ");
+        LocalDateTime start = LocalDateTime.parse(sc.nextLine(), fmt);
 
-                String delimitedProducts = line.replaceAll("(\\d+)(\\s|$)", "$1;");
-                delimitedProducts = delimitedProducts.replaceAll(";$", ""); // Remove o ; final se existir
+        System.out.print("Retorno (dd/MM/yyyy hh:mm): ");
+        LocalDateTime finish = LocalDateTime.parse(sc.nextLine(), fmt);
 
-                String[] products = delimitedProducts.split(";");
+        CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
 
-                for(String product: products) {
+        System.out.print("Entre com o preço por hora: ");
+        double pricePerHour = sc.nextDouble();
 
-                    String[] productsFields = product.split(",");
+        System.out.print("Entre com o preço por dia: ");
+        double pricePerDay = sc.nextDouble();
 
-                    String name = productsFields[0];
-                    Double value = Double.parseDouble(productsFields[1].trim());
-                    Integer quantity = Integer.parseInt(productsFields[2].trim());
+        RentalService rentalService = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
 
-                    list.add(new Product(name, value, quantity));
+        rentalService.processInvoice(cr);
 
-                }
-
-                line = br.readLine();
-            }
-
-            File path = new File(strPath); //pega o arquivo
-            File outDir = new File(path.getParent() + "/out");
-            if (!outDir.exists()) {
-                outDir.mkdirs();
-            }
-
-            File newFile = new File (outDir,"summary.csv");
-
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(newFile))) {
-                for(Product product: list) {
-                    bw.write(product.getName() + "," + String.format("%.2f", product.totalPrice()));
-                    bw.newLine();
-                }
-                bw.close();
-                System.out.println("File created in: " + newFile.getAbsolutePath());
-            }
-            catch (IOException e){
-                System.out.println("Error: " + e.getMessage());
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.println("FATURA:");
+        System.out.println("Pagamento basico: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
+        System.out.println("Imposto: " + String.format("%.2f", cr.getInvoice().getTax()));
+        System.out.println("Pagamento total: " + String.format("%.2f", cr.getInvoice().getTotalPayment()));
 
         sc.close();
     }
