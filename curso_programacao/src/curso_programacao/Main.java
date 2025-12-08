@@ -1,51 +1,47 @@
 package curso_programacao;
 
-import model.entities.CarRental;
-import model.entities.Vehicle;
-import model.services.BrazilTaxService;
-import model.services.RentalService;
+import model.entities.Contract;
+import model.services.ContractService;
+import model.services.PaypalService;
 
 import java.io.*;
 import java.text.ParseException;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
 
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
+        DateTimeFormatter fmt =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        DateTimeFormatter fmt =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        System.out.println("Entre os dados do contrato:");
+        System.out.print("Numero: ");
+        int number = sc.nextInt();
 
-        System.out.println("Entre com os dados do aluguel");
-        System.out.print("Modelo do carro: ");
-        String carModel = sc.nextLine();
+        System.out.print("Data (dd/MM/yyyy): ");
+        LocalDate date = LocalDate.parse(sc.next(), fmt);
 
-        System.out.print("Retirada (dd/MM/yyyy hh:mm): ");
-        LocalDateTime start = LocalDateTime.parse(sc.nextLine(), fmt);
+        System.out.print("Valor do contrato: ");
+        double totalValue = sc.nextDouble();
 
-        System.out.print("Retorno (dd/MM/yyyy hh:mm): ");
-        LocalDateTime finish = LocalDateTime.parse(sc.nextLine(), fmt);
+        System.out.print("Entre com o numero de parcelas: ");
+        int months = sc.nextInt();
 
-        CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
+        Contract contract = new Contract(number, date, totalValue);
 
-        System.out.print("Entre com o preço por hora: ");
-        double pricePerHour = sc.nextDouble();
+        ContractService service = new ContractService(contract, months, new PaypalService());
 
-        System.out.print("Entre com o preço por dia: ");
-        double pricePerDay = sc.nextDouble();
+        service.processContract(contract, months);
 
-        RentalService rentalService = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
-
-        rentalService.processInvoice(cr);
-
-        System.out.println("FATURA:");
-        System.out.println("Pagamento basico: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
-        System.out.println("Imposto: " + String.format("%.2f", cr.getInvoice().getTax()));
-        System.out.println("Pagamento total: " + String.format("%.2f", cr.getInvoice().getTotalPayment()));
+        System.out.println("Parcelas:");
+        for (int i=0; i<contract.getInstallments().size(); i++) {
+            System.out.println(contract.getInstallments().get(i).getDueDate().format(fmt) + " - " + String.format("%.2f", contract.getInstallments().get(i).getAmount()));
+        }
 
         sc.close();
     }
