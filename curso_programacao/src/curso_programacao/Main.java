@@ -1,48 +1,20 @@
 package curso_programacao;
 
-import model.entities.Contract;
-import model.services.ContractService;
-import model.services.PaypalService;
-
-import java.io.*;
-import java.text.ParseException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import model.entities.AbstractShape;
+import model.entities.Circle;
+import model.entities.Rectangle;
+import model.enums.Color;
 
 public class Main {
 
     public static void main(String[] args) {
+        AbstractShape s1 = new Circle(Color.BLACK, 2.0);
+        AbstractShape s2 = new Rectangle(Color.WHITE, 3.0, 4.0);
 
-        Locale.setDefault(Locale.US);
-        Scanner sc = new Scanner(System.in);
-        DateTimeFormatter fmt =  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("Circle color: " + s1.getColor());
+        System.out.println("Circle area: " + String.format("%.3f", s1.area()));
+        System.out.println("Rectangle color: " + s2.getColor());
+        System.out.println("Rectangle area: " + String.format("%.3f", s2.area()));
 
-        System.out.println("Entre os dados do contrato:");
-        System.out.print("Numero: ");
-        int number = sc.nextInt();
-
-        System.out.print("Data (dd/MM/yyyy): ");
-        LocalDate date = LocalDate.parse(sc.next(), fmt);
-
-        System.out.print("Valor do contrato: ");
-        double totalValue = sc.nextDouble();
-
-        System.out.print("Entre com o numero de parcelas: ");
-        int months = sc.nextInt();
-
-        Contract contract = new Contract(number, date, totalValue);
-
-        ContractService service = new ContractService(contract, months, new PaypalService());
-
-        service.processContract(contract, months);
-
-        System.out.println("Parcelas:");
-        for (int i=0; i<contract.getInstallments().size(); i++) {
-            System.out.println(contract.getInstallments().get(i).getDueDate().format(fmt) + " - " + String.format("%.2f", contract.getInstallments().get(i).getAmount()));
-        }
-
-        sc.close();
     }
 }
