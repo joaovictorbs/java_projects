@@ -1,16 +1,14 @@
 package model.entities;
 
-public class Employee {
-	public String name;
-	public Integer hours;
-	public Double valuePerHour;
+public class Employee implements Comparable<Employee> {
+    public String name;
+    public Double salary;
 
     public Employee(){}
 
-    public Employee(String name, Integer hours, Double valuePerHour){
+    public Employee(String name, Double salary){
         this.name = name;
-        this.hours = hours;
-        this.valuePerHour = valuePerHour;
+        this.salary = salary;
     }
 
     public String getName() {
@@ -21,23 +19,19 @@ public class Employee {
         this.name = name;
     }
 
-    public Integer getHours() {
-        return hours;
+    public Double getSalary() {
+        return salary;
     }
 
-    public void setHours(Integer hours) {
-        this.hours = hours;
+    public void setSalary(Double salary) {
+        this.salary = salary;
     }
 
-    public Double getValuePerHour() {
-        return valuePerHour;
+    @Override
+    public int compareTo(Employee other) {
+        return name.compareTo(other.getName());
     }
 
-    public void setValuePerHour(Double valuePerHour) {
-        this.valuePerHour = valuePerHour;
-    }
 
-    public double payment() {
-        return hours * valuePerHour;
-    }
 }
+

@@ -1,4 +1,4 @@
-package model.entities;
+/*package model.entities;
 
 public class OutsourcedEmployee extends Employee{
 
@@ -24,3 +24,4 @@ public class OutsourcedEmployee extends Employee{
         return super.payment() + additionalCharge * 1.1;
     }
 }
+*/
