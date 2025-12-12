@@ -1,22 +1,18 @@
 package model.entities;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import java.util.Objects;
 
 public class Client {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
     private String name;
     private String email;
-    private Date birthDate;
 
     public Client(){}
 
-    public Client(String name, String email, Date birthDate) {
+    public Client(String name, String email) {
         this.setName(name);
         this.setEmail(email);
-        this.setBirthDate(birthDate);
     }
 
     public String getName() {
@@ -35,21 +31,23 @@ public class Client {
         this.email = email;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(name);
-        sb.append(" (" + sdf.format(birthDate));
         sb.append(") - " + email + "\n");
 
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(name, client.name) && Objects.equals(email, client.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, email);
+    }
 }

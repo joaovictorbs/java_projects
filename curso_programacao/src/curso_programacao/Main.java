@@ -1,31 +1,23 @@
 package curso_programacao;
 
+import model.entities.Client;
+
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        List<Integer> myInts = Arrays.asList(1, 2, 3, 4);
-        List<Double> myDoubles = Arrays.asList(3.14, 6.28);
-        List<Object> myObjs = new ArrayList<Object>();
+        Client c1 = new Client("Maria", "maria@gmail.com");
+        Client c2 = new Client("Maria", "maria@gmail.com");
 
-        copy(myInts, myObjs);
-        printList(myObjs);
-        copy(myDoubles, myObjs);
-        printList(myObjs);
-    }
+        String s1 = new String("Test");
+        String s2 = new String("Test");
 
-    public static void copy(List<? extends Number> source, List<? super Number> destiny) {
-        for(Number number : source) {
-            destiny.add(number);
-        }
-    }
-
-    public static void printList(List<?> list) {
-        for (Object obj : list) {
-            System.out.print(obj + " ");
-        }
-        System.out.println();
+        System.out.println(c1.hashCode());
+        System.out.println(c2.hashCode());
+        System.out.println(c1.equals(c2));
+        System.out.println(c1 == c2);
+        System.out.println(s1 == s2);
 
     }
 
