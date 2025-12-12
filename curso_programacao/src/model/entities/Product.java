@@ -1,18 +1,16 @@
 package model.entities;
 
-public class Product {
+public class Product  implements Comparable<Product>{
 	
 	private String name;
 	private Double price;
-    Integer quantity;
 
 	public Product(){}
 
-	public Product(String name, Double price, Integer quantity) {
+	public Product(String name, Double price) {
 		this.name = name;
 		this.price = price;
-        this.quantity = quantity;
-	}
+    }
 	
 	public String getName() {
 		return name;
@@ -30,15 +28,15 @@ public class Product {
 		this.price = price;
 	}
 
-    public Integer getQuantity() {
-        return quantity;
+    @Override
+    public String toString() {
+        return name + ", " + String.format("%.2f", price);
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    @Override
+    public int compareTo(Product other) {
+        return price.compareTo(other.getPrice());
     }
 
-    public Double totalPrice() {
-        return price * quantity;
-    }
+
 }
