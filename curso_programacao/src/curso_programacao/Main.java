@@ -1,38 +1,17 @@
 package curso_programacao;
 
-import model.entities.Product;
-import model.services.CalculationService;
-import model.services.PrintService;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        List<Integer> myInts = Arrays.asList(5,2,10);
+        printList(myInts);
+    }
 
-        Locale.setDefault(Locale.US);
-
-        List<Product> list = new ArrayList<>();
-
-        String path = "C:\\temp\\in.txt";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line = br.readLine();
-            while (line != null) {
-                String[] fields = line.split(",");
-                list.add(new Product(fields[0], Double.parseDouble(fields[1])));
-                line = br.readLine();
-            }
-
-            Product x = CalculationService.max(list);
-            System.out.println("Most Expensive: ");
-            System.out.println(x);
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+    public static void printList(List<?> list) { //tipo coringa
+        for (Object obj : list) {
+            System.out.println(obj);
         }
-
     }
 
 }
