@@ -1,23 +1,36 @@
 package curso_programacao;
 
-import model.entities.Client;
-
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        Client c1 = new Client("Maria", "maria@gmail.com");
-        Client c2 = new Client("Maria", "maria@gmail.com");
+        Set<String> set = new HashSet<>();
+        Set<Integer> a = new TreeSet<>(Arrays.asList(0,2,4,5,6,8,10));
+        Set<Integer> b = new TreeSet<>(Arrays.asList(5,6,7,8,9,10));
 
-        String s1 = new String("Test");
-        String s2 = new String("Test");
+        set.add("TV");
+        set.add("Notebook");
+        set.add("Tablet");
 
-        System.out.println(c1.hashCode());
-        System.out.println(c2.hashCode());
-        System.out.println(c1.equals(c2));
-        System.out.println(c1 == c2);
-        System.out.println(s1 == s2);
+        System.out.println(set.contains("Notebook"));
+
+        //union
+        Set<Integer> c = new TreeSet<>(a);
+        c.addAll(b);
+        System.out.println(c);
+
+        //intersection
+        Set<Integer> d = new TreeSet<>(a);
+        d.retainAll(b);
+        System.out.println(d);
+
+        //difference
+        Set<Integer> e = new TreeSet<>(a);
+        e.removeAll(b);
+        System.out.println(e);
+
+
 
     }
 
