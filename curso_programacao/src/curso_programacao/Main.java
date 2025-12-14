@@ -1,41 +1,28 @@
 package curso_programacao;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
 
+import model.entities.Product;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Map<Product, Double> stock = new TreeMap<>();
 
-        Set<Integer> courses = new HashSet<>();
+        Product p1 = new Product("TV", 900.0);
+        Product p2 = new Product("Notebook", 1200.0);
+        Product p3 = new Product("Tablet", 400.0);
 
-        System.out.print("How many students for course A? ");
-        int courseA = sc.nextInt();
+        stock.put(p1, 10000.0);
+        stock.put(p2, 20000.0);
+        stock.put(p3, 15000.0);
 
-        for(int i=0; i<courseA; i++) {
-            courses.add(sc.nextInt());
-        }
+        Product ps = new Product("TV", 900.0);
 
-        System.out.print("How many students for course B? ");
-        int courseB = sc.nextInt();
+        System.out.println("Contains 'ps' key: " + stock.containsKey(ps));
 
-        for(int i=0; i<courseB; i++) {
-            courses.add(sc.nextInt());
-        }
-
-        System.out.print("How many students for course C? ");
-        int courseC = sc.nextInt();
-
-        for(int i=0; i<courseC; i++) {
-            courses.add(sc.nextInt());
-        }
-
-        System.out.println("Total students: " + courses.size());
-
-        sc.close();
 
     }
 

@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Objects;
+
 public class Product  implements Comparable<Product>{
 	
 	private String name;
@@ -38,5 +40,15 @@ public class Product  implements Comparable<Product>{
         return name.toUpperCase().compareTo(other.getName().toUpperCase());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(name, product.name) && Objects.equals(price, product.price);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
+    }
 }
