@@ -1,41 +1,40 @@
 package curso_programacao;
 
-import model.entities.LogEntry;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Date;
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter file full path: ");
-        String path = sc.nextLine();
+        Set<Integer> courses = new HashSet<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            Set<LogEntry> set = new HashSet<>();
+        System.out.print("How many students for course A? ");
+        int courseA = sc.nextInt();
 
-            String line = br.readLine();
-            while (line != null) {
-                String[] fields = line.split(" ");
-                String username = fields[0];
-                Date moment = Date.from(Instant.parse(fields[1]));
-
-                set.add(new LogEntry(username, moment));
-
-                line = br.readLine();
-            }
-            System.out.println("Total users: " + set.size());
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+        for(int i=0; i<courseA; i++) {
+            courses.add(sc.nextInt());
         }
+
+        System.out.print("How many students for course B? ");
+        int courseB = sc.nextInt();
+
+        for(int i=0; i<courseB; i++) {
+            courses.add(sc.nextInt());
+        }
+
+        System.out.print("How many students for course C? ");
+        int courseC = sc.nextInt();
+
+        for(int i=0; i<courseC; i++) {
+            courses.add(sc.nextInt());
+        }
+
+        System.out.println("Total students: " + courses.size());
+
         sc.close();
 
     }
