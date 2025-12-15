@@ -1,29 +1,40 @@
 package curso_programacao;
 
-
-import model.entities.Product;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Map<Product, Double> stock = new TreeMap<>();
+        Scanner sc = new Scanner(System.in);
 
-        Product p1 = new Product("TV", 900.0);
-        Product p2 = new Product("Notebook", 1200.0);
-        Product p3 = new Product("Tablet", 400.0);
+        Map<String, Integer> votes = new HashMap<>();
 
-        stock.put(p1, 10000.0);
-        stock.put(p2, 20000.0);
-        stock.put(p3, 15000.0);
+        System.out.print("Enter file full path: ");
 
-        Product ps = new Product("TV", 900.0);
+        String path = sc.nextLine();
 
-        System.out.println("Contains 'ps' key: " + stock.containsKey(ps));
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line = br.readLine();
 
+            while(line != null) {
+                String[] fields = line.split(",");
+                votes.merge(fields[0], Integer.parseInt(fields[1]), Integer::sum);
 
+                line = br.readLine();
+            }
+
+            for (String key : votes.keySet()) {
+                System.out.println(key + ": " + votes.get(key));
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
 }
