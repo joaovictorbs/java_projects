@@ -2,9 +2,6 @@ package curso_programacao;
 
 import model.entities.Product;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -15,6 +12,13 @@ public class Main {
         list.add(new Product("TV", 900.0));
         list.add(new Product("Notebook", 1200.00));
         list.add(new Product("Tablet", 450.00));
+
+        Comparator<Product> comp = new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+            }
+        };
 
         list.sort(new MyComparator());
 
