@@ -1,6 +1,7 @@
 package curso_programacao;
 
 import model.entities.Product;
+import util.PriceUpdate;
 import util.ProductPredicate;
 
 import java.util.*;
@@ -16,14 +17,9 @@ public class Main {
         list.add(new Product("Tablet", 350.50));
         list.add(new Product("HD Case", 80.90));
 
-        double min = 100.0;
-        
-        list.removeIf(p -> p.getPrice() >= min);
+        list.forEach(new PriceUpdate());
 
-        for (Product p : list) {
-            System.out.println(p);
-        }
-
+        list.forEach(System.out::println);
 
     }
 
