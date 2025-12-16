@@ -1,6 +1,7 @@
 package curso_programacao;
 
 import model.entities.Product;
+import model.services.ProductService;
 
 import java.util.*;
 import java.util.function.Function;
@@ -15,11 +16,12 @@ public class Main {
         list.add(new Product("Mouse", 50.00));
         list.add(new Product("Tablet", 350.50));
         list.add(new Product("HD Case", 80.90));
-        
-        List<String> names = list.stream().map(p -> p.getName().toUpperCase()).collect(Collectors.toList());
 
-        names.forEach(System.out::println);
+        ProductService ps = new ProductService();
 
+        double sum = ps.filteredSum(list, p -> p.getName().charAt(0) == 'T');
+
+        System.out.println("Sum = " + String.format("%.2f", sum));
     }
 
 }
