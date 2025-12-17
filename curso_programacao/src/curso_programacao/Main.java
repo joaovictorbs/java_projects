@@ -6,22 +6,24 @@ import model.services.ProductService;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
 
-        List<Product> list = new ArrayList<>();
+        List<Integer> list = Arrays.asList(3, 4, 5, 10, 7);
+        Stream<Integer> st1 = list.stream();
+        System.out.println(Arrays.toString(st1.toArray()));
 
-        list.add(new Product("Tv", 900.00));
-        list.add(new Product("Mouse", 50.00));
-        list.add(new Product("Tablet", 350.50));
-        list.add(new Product("HD Case", 80.90));
+        Stream<String> st2 = Stream.of("Maria", "Alex", "Bob");
+        System.out.println(Arrays.toString(st2.toArray()));
 
-        ProductService ps = new ProductService();
+        Stream<Integer> st3 = Stream.iterate(0 , x -> x + 2);
+        System.out.println(Arrays.toString(st3.limit(10).toArray()));
 
-        double sum = ps.filteredSum(list, p -> p.getName().charAt(0) == 'T');
+        Stream<Long> st4 = Stream.iterate(new Long[]{ 0L, 1L }, p->new Long[]{ p[1], p[0]+p[1] }).map(p -> p[0]);
+        System.out.println(Arrays.toString(st4.limit(10).toArray()));
 
-        System.out.println("Sum = " + String.format("%.2f", sum));
     }
 
 }
