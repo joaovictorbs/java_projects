@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
 
 import com.educandoweb.workshopmongo.domain.User;
 import com.educandoweb.workshopmongo.repository.UserRepository;
